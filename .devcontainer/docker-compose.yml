@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        environment:
+            PORT: 3000
+        ports:
+            - 3000:3000
+        volumes:
+            - ..:/workspace
+        user: vscode
+        command: sleep infinity
+
+    memcached:
+        container_name: memcached1
+        image: memcached:latest
+        ports:
+            - "11211:11211"
+
+# volumes:
+#     memcached-storage:
+
+
+# version: "3.8"
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     volumes:
+#       - .:/workspace
+#     ports:
+#       - "6000:6000"
+#     environment:
+#       - INFLUXDB_HOST=influxdb
+#       - MONGO_HOST=mongodb
+#     depends_on:
+#       - influxdb
+#       - mongodb
+#   influxdb:
+#     image: influxdb:latest
+#     container_name: influxdb
+#     ports:
+#       - "8086:8086"
+#     volumes:
+#       - influxdb_data:/var/lib/influxdb
+#   mongodb:
+#     image: mongo:latest
+#     container_name: mongodb
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongodb_data:/data/db
+# volumes:
+#   influxdb_data:
+#   mongodb_data:
