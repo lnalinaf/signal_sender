@@ -9,13 +9,14 @@ async def consume_stream(
     queue_stream: Queue,
     tradePairs: list = ["btcusdt"],
     timeFrame: int = 1,
+    typeconnect: str = "trade",
     maxLenghtQueue=52,
 ):
     queue_stream._maxsize = maxLenghtQueue
 
     subscription_msg = {
         "method": "SUBSCRIBE",
-        "params": [pair.lower() + "@trade" for pair in tradePairs],
+        "params": [pair.lower() + "@" + typeconnect for pair in tradePairs],
         "id": 1,
     }
 
